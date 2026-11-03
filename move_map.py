@@ -3,14 +3,14 @@ from pygame import K_a, K_d, K_w, K_s, K_LEFT, K_RIGHT, K_UP, K_DOWN, K_k
 class MoveMap:
     map = {}
     def __init__(self):
-        self.map = {K_a : PlayerMove((-0.1,0), True),
-               K_d : PlayerMove((0.1,0), True),
-               K_w: PlayerMove((0,-0.1), True),
-               K_s : PlayerMove((0,0.1), True),
-               K_LEFT : PlayerMove((-0.1,0), False),
-               K_RIGHT : PlayerMove((0.1,0), False),
-               K_UP: PlayerMove((0,-0.1), False),
-               K_DOWN : PlayerMove((0,0.1), False)
+        self.map = {K_a : PlayerMove((-0.125,0), True),
+               K_d : PlayerMove((0.125,0), True),
+               K_w: PlayerMove((0,-0.125), True),
+               K_s : PlayerMove((0,0.125), True),
+               K_LEFT : PlayerMove((-0.125,0), False),
+               K_RIGHT : PlayerMove((0.125,0), False),
+               K_UP: PlayerMove((0,-0.125), False),
+               K_DOWN : PlayerMove((0,0.125), False)
                }
 
 class PlayerMove:

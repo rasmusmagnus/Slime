@@ -16,6 +16,8 @@ class Player(Renderable):
     height = 0
     color = (128, 128, 128)
     center = (300, 300)
+    velocity = (0,0)
+    gravity_acc = 0
 
     def __init__(self, is_player_one):
         self.is_player_one = is_player_one
@@ -26,8 +28,21 @@ class Player(Renderable):
             self.color = (255, 0, 0)
             self.center = (400, 200)
 
-    def move(self, player_move : PlayerMove):
-        self.center = [self.center[i] + player_move.move[i] for i in range(len(player_move.move))]
+    #def move(self, player_move : PlayerMove):
+        #self.center = [self.center[i] + player_move.move[i] for i in range(len(player_move.move))]
+
+    def set_player_velocity(self, player_move : PlayerMove):
+        
+        self.velocity = (player_move.move[0], player_move.move[1] if self.center[1] >= render_constants.floor_height else self.velocity[1])
+
+    def reset_player_velocity(self):
+        self.velocity = (0,self.velocity[1])
+        
+    def update_player_pos(self):
+        self.gravity_acc =  0.00006 if self.center[1]  < render_constants.floor_height else 0
+        self.velocity = (self.velocity[0],self.velocity[1]+self.gravity_acc)
+        self.center = (self.center[0] + self.velocity[0], min(self.center[1]+self.velocity[1], render_constants.floor_height))
+        
 
 
     def render(self, screen):

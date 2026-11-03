@@ -45,8 +45,13 @@ def main():
         moves += [move_map.map[key] for key in move_map.map.keys() if pressed[key]]
         if len(moves) > 0:
             reduced = reduce(moves)
-            player2.move(reduced[1])
-            player1.move(reduced[0])
+            player2.set_player_velocity(reduced[1])
+            player1.set_player_velocity(reduced[0])
+        else:
+            player1.reset_player_velocity()
+            player2.reset_player_velocity()
+        player1.update_player_pos()
+        player2.update_player_pos()
         
         render_screen(screen, game_objects)
         pygame.display.flip()
