@@ -1,12 +1,41 @@
 import pygame
 import render_constants
+import numpy as np
 from abc import ABC, abstractmethod
+from move_map import PlayerMove
+
+
 
 class Renderable(ABC):
 
     @abstractmethod
     def render(screen):
         pass
+
+class Player(Renderable):
+    height = 0
+    color = (128, 128, 128)
+    center = (300, 300)
+
+    def __init__(self, is_player_one):
+        self.is_player_one = is_player_one
+        if self.is_player_one:
+            self.color = (0,255, 0)
+            self.center = (300, 300)
+        else:
+            self.color = (255, 0, 0)
+            self.center = (400, 200)
+
+    def move(self, player_move : PlayerMove):
+        self.center = [self.center[i] + player_move.move[i] for i in range(len(player_move.move))]
+
+
+    def render(self, screen):
+        radius = render_constants.slime_height
+        pygame.draw.circle(screen, self.color, self.center, radius, draw_top_left=True, draw_top_right=True)
+
+
+
 
 class Sky(Renderable):
     colour = (1, 1, 255)
